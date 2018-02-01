@@ -6,4 +6,3 @@ define('SEARCH_URL','https://www.bn.ru/zap_fl.phtml?');
 
 require_once 'Vendor/Transport.php';
 require_once 'Vendor/Parser.php';
-require_once 'Vendor/Search.php';

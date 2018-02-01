@@ -4,6 +4,6 @@ $(function() {
         $.ajax({
             method: 'POST',
             url: '/Vendor/javascript-enabled.php'
-        });
+            });
     }
 });
