@@ -6,4 +6,3 @@ require_once 'config.php';
     $action     = 'index';
 
 require_once('Views/layout.php');
-

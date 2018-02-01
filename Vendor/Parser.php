@@ -1,8 +1,8 @@
 <?php
 namespace Vendor\Parser;
 
-class Parse{
-
+class Parse
+{
     public function file_get_contents_curl($url)
     {
         $ch = curl_init();
@@ -16,5 +16,4 @@ class Parse{
 
         return $data;
     }
-
 }

@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <? foreach($RealEstate as $result):?>
+        <?php foreach ($RealEstate as $result):?>
             <tr>
                 <td><a href="<?=$result['url']?>"><?=$result['url']?></a></td>
                 <td><?=$result['rooms']?></td>
@@ -31,7 +31,7 @@
                 <td><?=$result['seller']?></td>
                 <td><?=$result['notes']?></td>
             </tr>
-        <? endforeach;?>
+        <?php endforeach;?>
         </tbody>
     </table>
 </div>

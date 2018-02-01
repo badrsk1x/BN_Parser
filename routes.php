@@ -3,14 +3,13 @@
 use Controllers\PagesController\PagesController;
 use Controllers\RealEstateController\RealEstateController;
 
-
-class Call{
-
-    static public function Action($controller, $action){
-
+class Call
+{
+    public static function Action($controller, $action)
+    {
         self::call_controller($controller) ;
 
-        switch($controller) {
+        switch ($controller) {
             case 'pages':
                 self::call_controller('RealEstate');
                 $controller = new PagesController();
@@ -22,11 +21,11 @@ class Call{
         }
 
         $controller->{ $action }();
-
     }
 
-    private function call_controller($controller){
-    require_once('Controllers/' . $controller . '_controller.php');
+    private function call_controller($controller)
+    {
+        require_once('Controllers/' . $controller . '_controller.php');
     }
 }
 

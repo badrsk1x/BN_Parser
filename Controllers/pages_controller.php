@@ -4,10 +4,10 @@ namespace Controllers\PagesController;
 use Vendor\Transport\Transport ;
 use Controllers\RealEstateController\RealEstateController;
 
-
-class PagesController {
-    public function home() {
-
+class PagesController
+{
+    public function home()
+    {
         $obj = new Transport();
         $metros = $obj->GetMetroFromFile(METRO_FILE);
         $requests = new RealEstateController($_POST);
@@ -16,7 +16,8 @@ class PagesController {
     }
 
 
-    public function error() {
+    public function error()
+    {
         require_once('Views/error.php');
     }
 }

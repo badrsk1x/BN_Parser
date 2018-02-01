@@ -3,7 +3,8 @@ namespace Models\RealEstate;
 
 use Vendor\Parser\Parse;
 
-class RealEstate {
+class RealEstate
+{
     // we define  attributes
     // they are public so that we can access them using directly
     public $rooms;
@@ -22,12 +23,12 @@ class RealEstate {
     public $metro;
 
 
-    public function __construct() {
-
+    public function __construct()
+    {
     }
 
-    public function FindFlats($url) {
-
+    public function FindFlats($url)
+    {
         $parser = new Parse();
         $html = $parser->file_get_contents_curl($url);
 
@@ -45,7 +46,6 @@ class RealEstate {
         $roomCount = 1;
 
         foreach ($nodes as $row) {
-
             $cells = array();
             $cell = $row->firstChild;
 
@@ -55,26 +55,25 @@ class RealEstate {
             }
 
             if (count($cells) == 1) {
-
-                if (strpos($cells[0], 'район') !== false)  {
+                if (strpos($cells[0], 'район') !== false) {
                     // finding the metro district
-                    $metro_rayon = explode('район',$cells[0])[0] ;
+                    $metro_rayon = explode('район', $cells[0])[0] ;
                 } else {
                     // Room numbers
                     $roomCount = (int)reset($cells);
                 }
-
             } else {
-
                 $cells[0] = $roomCount;
                 $cells[13] = $metro_rayon;
 
                 // some rows has colspan on columns with price
                 if (count($cells) == 10) {
-                    array_splice($cells,
+                    array_splice(
+                        $cells,
                         6,
                         1,
-                        array(0, '', $cells[6], ''));
+                        array(0, '', $cells[6], '')
+                    );
                 }
 
                 // link to site.
@@ -93,9 +92,5 @@ class RealEstate {
         }
 
         return $result;
-
-
     }
-
-
 }
