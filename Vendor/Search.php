@@ -1,7 +1,7 @@
 <?php
-namespace Search;
+namespace Vendor\Search;
 
-use \Parser\Parse;
+use Vendor\Parser\Parse;
 
 class Search{
 
@@ -14,7 +14,6 @@ class Search{
     public function __construct($request = null){
 
         if(!$request) $this->SearchEmptyQuery();
-
 
         $this->RoomFrom = $request['room-from'] ;
         $this->RoomTo = $request['room-to'] ;
@@ -52,19 +51,16 @@ class Search{
 
         $nodes = $xpath->query('//table[@class="results"]/tr[th[@class="head_kvart"] or td[@width or @class="tooltip"] or td[@class="distr2"] ]');
 
-        // Готовый массив с квартирами.
+        // Ready array with flats .
         $results = array();
-        // В таблице нет колонки с числом комнат (вернее, она не всегда есть) - считаем
-        // их сами.
+        // We dont have rooms number all the time in the query result  - we will count them
+
         $roomCount = 1;
 
         foreach ($nodes as $row) {
 
-
             $cells = array();
             $cell = $row->firstChild;
-
-
 
             while ($cell) {
                 $cell->nodeType == XML_ELEMENT_NODE and $cells[] = trim($cell->nodeValue);
@@ -74,11 +70,10 @@ class Search{
             if (count($cells) == 1) {
 
                 if (strpos($cells[0], 'район') !== false)  {
+                    // finding the metro district
                     $metro_rayon = explode('район',$cells[0])[0] ;
                 } else {
-
-                    // Строка всего с одной ячейкой - числом комнат для результатов в строках
-                    // ниже. Запоминаем его.
+                    // Room numbers
                     $roomCount = (int)reset($cells);
                 }
 
@@ -87,8 +82,7 @@ class Search{
                 $cells[0] = $roomCount;
                 $cells[13] = $metro_rayon;
 
-                // Некоторые объявления имеют colspan на полях с ценой - заполняем остальные
-                // данные нулевыми значениями.
+                // some rows has colspan on columns with price
                 if (count($cells) == 10) {
                     array_splice($cells,
                         6,
@@ -96,8 +90,7 @@ class Search{
                         array(0, '', $cells[6], ''));
                 }
 
-
-                // Наконец, присваиваем цепочке ячеек осознанные имена.
+                // here we go for our result .
                 $keys = array( 'rooms', 'address', 'floors', 'houseType', 'area', 'areaLiving', 'areaKitchen', 'toilet', 'price', 'conditions', 'seller', 'phone', 'notes','metro');
 
                 $result[] = array_combine($keys,
@@ -111,6 +104,10 @@ class Search{
     public function SearchEmptyQuery(){
 
         $this->RoomFrom = 0 ;
+        $this->RoomTo  = 0;
+        $this->PriceFrom = 0;
+        $this->PriceTo = 0;
+        $this->Metro= 0;
 
     }
 

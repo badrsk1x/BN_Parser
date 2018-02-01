@@ -1,5 +1,5 @@
 <?php
-namespace Parser;
+namespace Vendor\Parser;
 
 class Parse{
 

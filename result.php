@@ -2,7 +2,7 @@
 
 require_once 'config.php';
 
-use Search\Search;
+use Vendor\Search\Search;
 
 $search = new Search($_POST);
 

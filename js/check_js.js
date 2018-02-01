@@ -3,7 +3,7 @@ $(function() {
     if (document.cookie.indexOf('js') < 0) {
         $.ajax({
             method: 'POST',
-            url: '/javascript-enabled.php'
+            url: '/Vendor/javascript-enabled.php'
         });
     }
 });

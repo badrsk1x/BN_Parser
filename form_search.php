@@ -1,7 +1,7 @@
 <?
 
-use Transport\Transport ;
-use Search\Search;
+use Vendor\Transport\Transport ;
+use Vendor\Search\Search;
 
 $obj = new Transport();
 $metros = $obj->GetMetroFromFile(METRO_FILE);

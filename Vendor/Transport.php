@@ -1,7 +1,7 @@
 <?php
-namespace Transport;
+namespace Vendor\Transport;
 
-use \Parser\Parse;
+use Vendor\Parser\Parse;
 
 
 class Transport  {
@@ -10,7 +10,6 @@ class Transport  {
     {
         if (!$file or 0 == filesize( $file ) )
             $this->GetMetroFromBn() ;
-
 
         $contents = file_get_contents($file);
         $contents = utf8_encode($contents);
